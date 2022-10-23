@@ -1,0 +1,14 @@
+---
+- hosts: servers
+  tasks:
+    - name: Fetch the file from the Slave1 to Master
+      run_once: yes
+      fetch: src=/home/ubuntu/mainframe.txt dest=/home/ubuntu/buffer/ flat=yes
+      when: "inventory_hostname == 'server1'"
+
+    - name: Fetch the file from the  Master to slave
+      run_once: yes
+      copy: src=/home/ubuntu/buffer/mainframe.txt  dest=/home/ubuntu/
+      when: "inventory_hostname == 'server2'"
+      
+#Here hosts: server is been refered to the host file, please update accordingly
