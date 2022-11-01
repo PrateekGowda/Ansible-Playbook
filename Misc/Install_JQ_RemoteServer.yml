@@ -1,0 +1,14 @@
+---
+- name: Ansible Copy Example Local to Remote
+  hosts: slave2
+  tasks:
+    - name: copying shell script to destination
+      become: true 
+      copy:
+        src: /home/ubuntu/ansible/playbooks/jq.sh
+        dest: /home/ubuntu
+        owner: root
+        group: root
+        mode: 0644
+    - name : Run the shell script
+      command: sh /home/ubuntu/jq.sh
